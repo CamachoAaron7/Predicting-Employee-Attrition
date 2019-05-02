@@ -62,7 +62,7 @@ head(attrition)
 View(attrition)
 ```
 
-##Rename Column"ï..Age" to "Age"
+## Rename Column"ï..Age" to "Age"
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 colnames(attrition)[colnames(attrition)=="ï..Age"] <- "Age"
 ```
@@ -73,7 +73,7 @@ ggplot(attrition,aes(Attrition,fill=Attrition))+geom_bar()
 prop.table(table(attrition$Attrition))
 ```
 
-##Bivariate Analysis
+## Bivariate Analysis
 ### Bar Plots 1: Age, BusinessTravel, DailyRate, Department
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 p1 <- ggplot(attrition,aes(Age,fill=Attrition, alpha = 0.03))+geom_density()
@@ -298,7 +298,7 @@ attrition$YearsAtCompany_Group <- with(attrition,ifelse(YearsAtCompany>35,9,
 ```
 
 
-##Grouped/Binned Variables
+## Grouped/Binned Variables
 ### Bar Plots 10: AgeGroup, DistanceGroup, YearsWithManagerGroup, AverageTenurePerJob_Group 
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 p35 <- ggplot(attrition,aes(AgeGroup, fill = Attrition, alpha = 0.3))+geom_bar()
@@ -328,16 +328,16 @@ grid.arrange(p43,ncol=1,top = "Figure: Bar Plots 12")
 sapply(attrition, function(x) sum(is.na(x))) # No missing values
 ```
 
-###Numeric Variables
-####Correlation
-#####Discover Correlation between Numneric Variables
+### Numeric Variables
+#### Correlation
+##### Discover Correlation between Numneric Variables
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 numeric_variables <- sapply(attrition, is.numeric)
 matrix <- cor(attrition[,numeric_variables])
 corrplot(matrix, main="\n\nCorrelation for Numerical Variables", method="number")
 ```
 
-####OUTLIERS
+#### OUTLIERS
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 boxplot(attrition$YearsAtCompany, horizontal = TRUE, 
         main = "Boxplot of YearsAtCompany", xlab = "YearsAtCompany")
@@ -359,6 +359,13 @@ YearsAtCompany_Group
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 colnames(attrition)
 attrition <- attrition[,c(2,3,5,7,8,11,12,14,15,16,17,18,21,23,24,26,30,31,40, 41,42,44)]
+```
+
+#### Correlation Plot with cleaned data
+```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
+numeric_variables <- sapply(attrition, is.numeric)
+matrix <- cor(attrition[,numeric_variables])
+corrplot(matrix, main="\n\nCorrelation for Numerical Variables", method="number")
 ```
 
 ##Analysis & Statistics 
@@ -489,7 +496,7 @@ ggplot(attrition,aes(OverTime,fill=Attrition))+geom_bar()
 ```
 
 
-###NUMERIC VARIABLES
+### NUMERIC VARIABLES
 #### YearsWithoutPromotion_WithCurrentManager
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 summary(attrition$YearsWithoutPromotion_WithCurrentManager)
