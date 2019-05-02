@@ -82,7 +82,7 @@ p3 <- ggplot(attrition,aes(DailyRate,Attrition))+geom_point(size=5,alpha = 0.03,
 p4 <- ggplot(attrition,aes(Department,fill = Attrition))+geom_bar()
 grid.arrange(p1,p2,p3,p4,ncol=2,top = "Figure: Bar Plots 1")
 ```
-### Age: the majority of employees who leave approx. around 31 Years of age.
+#### Age: the majority of employees who leave approx. around 31 Years of age.
 #### Business Travel: Employees who travel, are more likely to leave.
 #### Daily Rate: There is no significant indications that can be found. 
 #### Department: R&D and Sales is where the most attrition occurred. However, it is important to note that the HR Department is proportionally smaller compared to the other departments. 
@@ -95,12 +95,12 @@ p7 <- ggplot(attrition,aes(EducationField,fill=Attrition))+geom_bar()
 p8 <- ggplot(attrition,aes(EmployeeCount,Attrition))+geom_point(size=5,alpha = 0.03, col="blue")
 grid.arrange(p5,p6,p7,p8,ncol=2,top = "Figure: Bar Plots 2")
 ```
-#### Distance From Home: An unexpected result where employees who lived closer where more apt to leave. 
-#### Education:1 = "Below College", 2 = "College", 3 = "Bachelor", 4 = "Master", 5 = "Doctor" . Those with a bachelors degree have the highest attrition.  Important to note that there are very few employees with a doctorate degree.  May have an impact on the amount that left in the Doctorate category.
-#### Education Field: AS we saw in the Departments graph, those in an HR Field are less likely to leave. Again, this may be due to the low number of individuals in this group. 
+#### Distance From Home:  An unexpected result where employees who lived closer where more apt to leave. 
+#### Education:  1 = "Below College", 2 = "College", 3 = "Bachelor", 4 = "Master", 5 = "Doctor" . Those with a bachelors degree have the highest attrition.  Important to note that there are very few employees with a doctorate degree.  May have an impact on the amount that left in the Doctorate category.
+#### Education Field:  AS we saw in the Departments graph, those in an HR Field are less likely to leave. Again, this may be due to the low number of individuals in this group. 
 #### Employee Count: No significant findings. All numbers in variable are 1.  
 
-### Bar Plots 3: EmployeeNumber, EnvironmentSatisfaction, Gender, HourlyRate, JobInvolvement, JobLevel
+### Bar Plots 3:  EmployeeNumber, EnvironmentSatisfaction, Gender, HourlyRate, JobInvolvement, JobLevel
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 p9 <- ggplot(attrition,aes(EmployeeNumber,Attrition))+geom_point(size=5,alpha = 0.03, col="blue")
 p10 <- ggplot(attrition,aes(EnvironmentSatisfaction,fill=Attrition))+geom_bar()
@@ -345,7 +345,7 @@ boxplot(attrition$MonthlyIncome, horizontal = TRUE,
         main = "Boxplot of MonthlyIncome", xlab = "MonthlyIncome")
 ```
 
-###Variables to Keep
+### Variables to Keep
 "
 Attrition, BusinessTravel, Department, Education, EducationField, 
 EnvironmentSatisfaction, Gender, JobInvolvement, JobLevel, JobRole, 
@@ -368,9 +368,9 @@ matrix <- cor(attrition[,numeric_variables])
 corrplot(matrix, main="\n\nCorrelation for Numerical Variables", method="number")
 ```
 
-##Analysis & Statistics 
+## Analysis & Statistics 
 
-###GROUPED VARIABLES
+### GROUPED VARIABLES
 #### DistanceGroup 
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 str(attrition$DistanceGroup)
@@ -424,7 +424,7 @@ table(attrition$Attrition, attrition$YearsWithoutPromotion_WithCurrentManager_gr
 prop.table(table(attrition$YearsWithoutPromotion_WithCurrentManager_group, attrition$Attrition))
 ```
 
-###CATEGORICAL Variables
+### CATEGORICAL Variables
 #### Gender
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 summary(attrition$Gender)
@@ -621,9 +621,9 @@ cluster.results <- kmodes(data.to.cluster, 3, iter.max = 10, weighted = FALSE)
 cluster.results
 summary(cluster.results)
 ```
-##Comparative "TEST" Testing
-#####install.packages("klaR")"
-#####install.packages("caret")"
+## Comparative "TEST" Testing
+##### install.packages("klaR")"
+##### install.packages("caret")"
 
 ### load libraries
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
@@ -667,7 +667,7 @@ fit.svmRadial <- train(Attrition~., data=dataset_test, method="svmRadial", metri
 set.seed(seed)
 fit.knn <- train(Attrition~., data=dataset_test, method="knn", metric=metric, preProc=c("center", "scale"), trControl=control)
 ```
-##### Naive Bayes
+### Naive Bayes - not used
 ##### set.seed(seed)
 ##### fit.nb <- train(Attrition~., data=dataset_test, method="nb", metric=metric, trControl=control)
 ### CART
@@ -675,7 +675,7 @@ fit.knn <- train(Attrition~., data=dataset_test, method="knn", metric=metric, pr
 set.seed(seed)
 fit.cart <- train(Attrition~., data=dataset_test, method="rpart", metric=metric, trControl=control)
 ```
-##### C5.0
+### C5.0 - not used
 ##### set.seed(seed)
 ##### fit.c50 <- train(Attrition~., data=dataset_test, method="C5.0", metric=metric, trControl=control)
 ### Bagged CART
@@ -775,8 +775,8 @@ library(MASS)
 exp(cbind(OR=coef(mod_fit), confint(mod_fit)))
 ```
 
-##Decision Trees
-###Decision Tree 1
+## Decision Trees
+### Decision Tree 1
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 tree <- ctree(Attrition~., training)
 plot(tree)
@@ -806,7 +806,7 @@ mod_fit_two <- glm(Attrition ~ BusinessTravel + EnvironmentSatisfaction + JobInv
 library(lmtest)
 lrtest(mod_fit_one, mod_fit_two)
 ```
-## RocK Curve 
+## Rock Curve 
 ##### install.packages("ROCR")
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 library(ROCR)
@@ -816,7 +816,7 @@ pred <- prediction(prob, testing$Attrition)
 perf <- performance(pred, measure = "tpr", x.measure = "fpr")
 plot(perf)
 ```
-###ROC Curve Accuracy 
+### ROC Curve Accuracy 
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 auc <- performance(pred, measure = "auc")
 auc <- auc@y.values[[1]]
@@ -827,7 +827,7 @@ auc
 sig_var <- train(Attrition ~ ., data=attrition, method ="glm", family="binomial")
 varImp(sig_var)
 ```
-####Significant Variables: BusinessTravel, EnvironmentalSatisfaction, JobInvolvement, MaritalStatus,  NumCompaniesWorked, OverTime, YearsWithoutPromotion_WithCurrentManager_group
+#### Significant Variables: BusinessTravel, EnvironmentalSatisfaction, JobInvolvement, MaritalStatus,  NumCompaniesWorked, OverTime, YearsWithoutPromotion_WithCurrentManager_group
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 sv1 <- ggplot(attrition,aes(BusinessTravel,fill = Attrition))+geom_bar()
 sv2 <- ggplot(attrition,aes(EnvironmentSatisfaction,fill = Attrition))+geom_bar()
@@ -844,4 +844,3 @@ grid.arrange(sv1,sv2,sv3,sv4,sv5,sv6,sv7,ncol=2,top = "Figure: Significant Varia
 ```{r warnings = FALSE, echo = FALSE, cache = FALSE, message = FALSE}
 write.csv(attrition, file = "cleaned_attrition.csv", row.names = FALSE)
 ```
-ttttt
